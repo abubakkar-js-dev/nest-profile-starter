@@ -34,16 +34,13 @@ export class ProfilesController {
   // PUT /profiles/:id
   @Put(':id')
   update(@Param('id') id: string, @Body() updateprofiledto: UpdateProfileDto) {
-    return {
-      message: `This action updates profile with id ${id}`,
-      ...updateprofiledto,
-    };
+    return this.profilesService.update(id, updateprofiledto);
   }
 
   // DELETE /profiles/:id
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
-    return { message: `This action removes profile with id ${id}` };
+    return this.profilesService.remove(id);
   }
 }
