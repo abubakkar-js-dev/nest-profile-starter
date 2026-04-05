@@ -1,30 +1,29 @@
 import { Injectable } from '@nestjs/common';
-
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class EmployeesService {
-  constructor(private readonly databserService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
   async create(createEmployeeDto: Prisma.EmployeeCreateInput) {
-    return await this.databserService.employee.create({
+    return await this.databaseService.employee.create({
       data: createEmployeeDto,
     });
   }
 
   async findAll(role?: 'INTERN' | 'ENGINEER' | 'ADMIN') {
     if (role) {
-      return await this.databserService.employee.findMany({
+      return await this.databaseService.employee.findMany({
         where: {
           role,
         },
       });
     }
-    return await this.databserService.employee.findMany();
+    return await this.databaseService.employee.findMany();
   }
 
   async findOne(id: number) {
-    return await this.databserService.employee.findUnique({
+    return await this.databaseService.employee.findUnique({
       where: {
         id,
       },
@@ -32,7 +31,7 @@ export class EmployeesService {
   }
 
   async update(id: number, updateEmployeeDto: Prisma.EmployeeUpdateInput) {
-    return this.databserService.employee.update({
+    return this.databaseService.employee.update({
       where: {
         id,
       },
@@ -41,7 +40,7 @@ export class EmployeesService {
   }
 
   async remove(id: number) {
-    return this.databserService.employee.delete({
+    return this.databaseService.employee.delete({
       where: {
         id,
       },
