@@ -9,6 +9,6 @@ export default defineConfig({
   datasource: {
     // Prisma CLI (db push, migrate) uses the direct connection (no pooler)
     // because transaction poolers don't support advisory locks used during migrations.
-    url: process.env['DIRECT_URL'],
+    url: process.env['DATABASE_URL_UNPOOLED'],
   },
 });
